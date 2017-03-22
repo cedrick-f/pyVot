@@ -46,7 +46,7 @@ HELPPATH = os.path.join(PATH,"Aide")
 # Définition du numéro de version
 #
 MAJOR=0
-MINOR=61
+MINOR=62
 VERSION="%i.%i"%(MAJOR,MINOR)
 
 #

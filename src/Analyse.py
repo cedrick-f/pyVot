@@ -2100,10 +2100,10 @@ class ChainesAction:
 ##            self.parcoursElemEntr.append([])
             
 ##        print
-        print "**** sens",self.sens,"*************"
-        print ">> Num",num
-        print ">> Position",pos
-        print ">> Eléments",self.parcoursElemEntr[num]
+#         print "**** sens",self.sens,"*************"
+#         print ">> Num",num
+#         print ">> Position",pos
+#         print ">> Eléments",self.parcoursElemEntr[num]
         
         if pos == None:
             return False
@@ -2115,16 +2115,16 @@ class ChainesAction:
         if  (    maillon.estEntretoise() \
              or (maillon.num is None and maillonOpp.estEntretoise())) \
            and len(self.parcoursElemEntr[num]) == 0:
-            print "prem maillon = entretoise"
+#             print "prem maillon = entretoise"
             return False    
             
         ### si l'élément est une entretoise
         if maillon.estEntretoise() or maillonOpp.estEntretoise():
-            print "  > Entretoise"
+#             print "  > Entretoise"
             # Ajout de l'entretoise et séparation éventuelle des parcours
             if not maillon.estEntretoise() and pos.radiale == "Al":
                 # Si double contact entretoise / épaulement
-                print "  > Nouveau parcours : cas 3 = double contact entretoise/épaulement"
+#                 print "  > Nouveau parcours : cas 3 = double contact entretoise/épaulement"
                 numSuiv = self.nouveauParcours(num)
                 self.ajouterMaillonElemEntre(pos.opposee(),numSuiv)
             else:
@@ -2133,12 +2133,12 @@ class ChainesAction:
 
             # Ajout du roulement suivant si entretoise sur alésage
             if pos.radiale == "Al":
-                print "  > Ajout rlt",pos.suivant("RoultSuiv",self.sens).code()
+#                 print "  > Ajout rlt",pos.suivant("RoultSuiv",self.sens).code()
                 self.ajouterMaillonElemEntre(pos.suivant("RoultSuiv",self.sens),numSuiv)
 
             # On continue par l'entretoise ...    
             if not self.maillonElemEntraines(mtg,pos.suivant("SauteEntre",self.sens),numSuiv):
-                print "  > num",numSuiv," Echec après entretoise !"
+#                 print "  > num",numSuiv," Echec après entretoise !"
                 if num == numSuiv:
                     return False
             if num == numSuiv:
@@ -2365,9 +2365,9 @@ class Analyse:
     def lancerAnalyse(self, mtgComplet, zoneMtg):
         """ Lance la procédure d'analyse du montage
            """
-           
-        print "Début analyse ..."
-        print mtgComplet.mtg
+#            
+#         print "Début analyse ..."
+#         print mtgComplet.mtg
         
         tm = time.clock()
         

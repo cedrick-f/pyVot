@@ -128,9 +128,9 @@ IconesElem = {'Roults'    : dosicon + "Ensemble Rlts.png",
 
 # Icones de l'arbre d'analyse ########################################################################
 IconesAnal = {'AnalysArret'    : dosicon + "Analyse_Arret.png",
-              'AnalysEffort'    : dosicon + "Analyse_Effort.png",
+              'AnalysEffort'   : dosicon + "Analyse_Effort.png",
               'AnalysMonta'    : dosicon + "Analyse_Monta.png",
-              'AnalysEtanch'    : dosicon + "Analyse_Etanch.png",
+              'AnalysEtanch'   : dosicon + "Analyse_Etanch.png",
               'AnalysDevis'    : dosicon + "Analyse_Devis.png",
               }
 
@@ -165,7 +165,7 @@ BoutonMont = {'AnimEnsb0Ar' : dosbout + "AnalyseMontage_Ens_0_Ar.png",
               'AnimRltD0AlR' : dosbout + "AnalyseMontage_Rlt_D_0_Al_R.png",
               'AnimRltD1AlR' : dosbout + "AnalyseMontage_Rlt_D_1_Al_R.png",
 
-              'SensInterditE' : dosbout + "Sens_interdit_80x45.png",
+#               'SensInterditE' : dosbout + "Sens_interdit_80x45.png",
               'SensInterditR' : dosbout + "Sens_interdit_50x45.png",
 
               'Chaine0' : dosbout + "AnalyseChaine0.png",
@@ -186,45 +186,54 @@ BoutonMont = {'AnimEnsb0Ar' : dosbout + "AnalyseMontage_Ens_0_Ar.png",
 for idFichierImage in FichiersDivers.keys():
     wx.tools.img2py.img2py(FichiersDivers[idFichierImage], fichIcone,
            imgName = str(idFichierImage),
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
 
 for idFichierImage in FichiersBoutonsElem.keys():
     wx.tools.img2py.img2py(FichiersBoutonsElem[idFichierImage], fichIcone,
            imgName = str(idFichierImage),
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     
 for idFichierImage in FichiersImage.keys():
     wx.tools.img2py.img2py(FichiersImage[idFichierImage], fichIcone, 
            imgName = idFichierImage,
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     
 for idFichierImage in Bouton.keys():
     wx.tools.img2py.img2py(Bouton[idFichierImage], fichIcone,
            imgName = "Bout_"+idFichierImage,
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     
 for idFichierImage in Icones.keys():
     wx.tools.img2py.img2py(Icones[idFichierImage], fichIcone,
            imgName = "Icon_"+idFichierImage,
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     
 for idFichierImage in IconesDivers.keys():
     wx.tools.img2py.img2py(IconesDivers[idFichierImage], fichIcone,
            imgName = "Icon_"+idFichierImage,
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     
 for idFichierImage in IconesElem.keys():
     wx.tools.img2py.img2py(IconesElem[idFichierImage], fichIcone,
            imgName = "Icon_"+idFichierImage,
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     
 for idFichierImage in IconesAnal.keys():
     wx.tools.img2py.img2py(IconesAnal[idFichierImage], fichIcone,
            imgName = "Icon_"+idFichierImage,
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     
 for idFichierImage in BoutonMont.keys():
     wx.tools.img2py.img2py(BoutonMont[idFichierImage], fichIcone,
            imgName = "Bout_"+idFichierImage,
-           append = True, icon = True)
+           append = True, icon = True,
+           functionCompatible = True)
     

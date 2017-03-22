@@ -291,7 +291,7 @@ class wxPyVot(wx.Frame):
 
     def __init__(self, parent, title, nomFichier = None):
         wx.Frame.__init__(self, parent, -1, title, size = (1024, 738),
-                          style=wx.DEFAULT_FRAME_STYLE | wx.NO_FULL_REPAINT_ON_RESIZE)
+                          style=wx.DEFAULT_FRAME_STYLE)# | wx.NO_FULL_REPAINT_ON_RESIZE)
         
         self.version = globdef.VERSION
         
@@ -370,7 +370,7 @@ class wxPyVot(wx.Frame):
         self.nbCdCF.CdCF_Cout.Bind(CdCF.EVT_CDCF_MODIFIED, self.OnCdCFModified)
         self.nbCdCF.CdCF_Etancheite.Bind(CdCF.EVT_CDCF_MODIFIED, self.OnCdCFModified)
         self.Bind(Montage.EVT_MTG_MODIFIED, self.OnMtgModified)
-        self.nbCdCF.MaxSize = self.nbCdCF.GetMaxSize()
+#         self.nbCdCF.MaxSize = self.nbCdCF.GetMaxSize()
 #        print "Size nbCdCF",self.nbCdCF.GetSize()
         
         
@@ -431,37 +431,56 @@ class wxPyVot(wx.Frame):
         self.mgr.AddPane(self.panelCentral, 
                          wx.aui.AuiPaneInfo().
                          CenterPane().
-                         Caption(u"Montage").
-                         PaneBorder(False).
-                         Floatable(ALLOW_AUI_FLOATING).
-                         CloseButton(False).
-                         Name("Montage").
-                         Layer(2).BestSize(self.zMont.GetMaxSize()).
-                         MaxSize(self.zMont.GetMaxSize()))
+                         Caption(u"Montage")
+#                          PaneBorder(False).
+#                          Floatable(ALLOW_AUI_FLOATING).
+#                          CloseButton(False).
+#                          Name("Montage").
+#                          Layer(2).BestSize(self.zMont.GetMaxSize()).
+#                          MaxSize(self.zMont.GetMaxSize()))
+                        )
+        
         self.mgr.AddPane(self.nbGauche,
                          wx.aui.AuiPaneInfo().
                          Left().Layer(2).BestSize((264, -1)).
                          MinSize((262, -1)).
                          CaptionVisible(False).
-                         Floatable(ALLOW_AUI_FLOATING).FloatingSize((264, 700)).
+#                          Floatable(ALLOW_AUI_FLOATING).FloatingSize((264, 700)).
                          CloseButton(False).
                          PaneBorder(False).
-                         Name("Action"))
+                         Name("Action")
+                         )
+        
         self.mgr.AddPane(self.nbCdCF,
                          wx.aui.AuiPaneInfo().
-                         Bottom().BestSize((-1, -1)).
-                         Fixed().
-                         MinSize((self.nbCdCF.MaxSize[0],self.nbCdCF.MaxSize[1]+28)).
-                         Floatable(ALLOW_AUI_FLOATING).FloatingSize((500, 160)).
-                         Dockable(True).
-#                         Dock().
-                         Caption(u"Cahier des Charges Fonctionnel").
+                         Bottom().
+                         Layer(1).
+#                         Floatable(False).
+                        BestSize((-1, 200)).
+                        MinSize((-1, 200)).
+                         MinimizeButton(True).
+                         Resizable(True).
+
+#                         DockFixed().
+#                         Gripper(True).
+#                         Movable(False).
+#                         Maximize().
+                         CaptionVisible(False).
+#                         PaneBorder(False).
                          CloseButton(False).
-                         PaneBorder(False).
+#                          Bottom().BestSize((-1, -1)).
+#                          Fixed().
+#                          MinSize((self.nbCdCF.MaxSize[0],self.nbCdCF.MaxSize[1]+28)).
+#                          Floatable(ALLOW_AUI_FLOATING).FloatingSize((500, 160)).
+#                          Dockable(True).
+# #                         Dock().
+                        Caption(u"Cahier des Charges Fonctionnel").
+#                          CloseButton(False).
+#                          PaneBorder(False).
                          Name("CdCF"))
         
         self.mgr.Update()
-        self.mgr.SetFlags(self.mgr.GetFlags() ^ wx.aui.AUI_MGR_TRANSPARENT_DRAG)
+#         self.mgr.SetFlags(self.mgr.GetFlags() ^ wx.aui.AUI_MGR_TRANSPARENT_DRAG)
         
         
         
@@ -1367,6 +1386,8 @@ class NbGauche(wx.Notebook):
 class panelRoulement(wx.Panel):
     def __init__(self, parent, master, fam):
         wx.Panel.__init__(self, parent, -1)
+        bg_color = parent.GetBackgroundColour()
+        self.SetBackgroundColour(bg_color)
         
         bs = wx.BoxSizer(wx.VERTICAL)
         self.master = master
@@ -1714,7 +1735,8 @@ class pnlBoutonsElem(scrolled.ScrolledPanel):
             l = cnt % n
             gbs.Add(self.dicBoutons[nb],(c+ls, l))
             self.dicBoutons[nb].SetDefault()
-            self.dicBoutons[nb].SetSize(self.dicBoutons[nb].GetBestSize())
+            self.dicBoutons[nb].SetInitialSize()
+#             self.dicBoutons[nb].SetSize(self.dicBoutons[nb].GetBestSize())
             self.dicBoutons[nb].SetToolTipString(Elements.listeElements[nb]['nom'])
             
             cnt += 1
@@ -1802,7 +1824,7 @@ class MenuPrincipal(wx.MenuBar):
         menu.AppendSeparator()
         
         exitItem = wx.MenuItem(menu, 1100, '&Quitter\tCtrl-Q', u"Quitter l'application")
-        exitItem.SetBitmap(Icones.getexitBitmap())
+#         exitItem.SetBitmap(Icones.getexitBitmap())
         menu.AppendItem(exitItem)
         # à faire ...
         self.parent.Bind(wx.EVT_MENU, self.parent.OnFileExit, exitItem)

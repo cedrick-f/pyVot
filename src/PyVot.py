@@ -27,7 +27,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-
+import wx
 import Icones
 import sys, os, getpass
 
@@ -40,7 +40,7 @@ from globdef import *
 
 #import sys, os, time, traceback, types
 
-import wx
+
 import FenPrincipale
 #import wx.aui
 #import wx.html
@@ -136,6 +136,7 @@ def main():
 #        pass
     
     app = PyVotApp(False)
+#     wx.Log.SetActiveTarget( LogPrintStackStderr() )
     app.MainLoop()
 
 
@@ -158,7 +159,7 @@ def PyVotRunning():
             pass
 #----------------------------------------------------------------------------
 #----------------------------------------------------------------------------
-
+# from customLogTarget import *
 if __name__ == '__main__':
     __name__ = 'Main'
     #
@@ -168,16 +169,19 @@ if __name__ == '__main__':
     #
     # Amélioration de la vitesse de traitement en utilisant psyco
     #
-    if USE_PSYCO:
-        try:
-            import psyco
-            HAVE_PSYCO=True
-        except ImportError:
-            HAVE_PSYCO=False
-        if HAVE_PSYCO:
-            print "Psyco !!!!!"
-            psyco.full()
+#     if USE_PSYCO:
+#         try:
+#             import psyco
+#             HAVE_PSYCO=True
+#         except ImportError:
+#             HAVE_PSYCO=False
+#         if HAVE_PSYCO:
+#             print "Psyco !!!!!"
+#             psyco.full()
             
+    
+    
+    
     main()
 
 #----------------------------------------------------------------------------

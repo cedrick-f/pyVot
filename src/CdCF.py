@@ -100,24 +100,25 @@ pression = {-1 : u"(extérieur)",
 #                  70  : u"Coût maximum",
 #                  }
 
-class nbCdCF(wx.Notebook):
+class nbCdCF(wx.Panel):
     def __init__(self, parent, mtgComplet, app):
-        wx.Notebook.__init__(self, parent, -1, style = wx.CLIP_CHILDREN)
-        imgList = wx.ImageList(16, 16)
-        self.AssignImageList(imgList)
-        self.MaxSize = None
         
+        wx.Panel.__init__(self, parent, -1, style = wx.CLIP_CHILDREN)
+#         imgList = wx.ImageList(16, 16)
+#         self.AssignImageList(imgList)
+        self.MaxSize = None
+        self.nb = wx.Notebook(self, -1, style = wx.CLIP_CHILDREN)
         # Première page du NoteBook
         #--------------------------
-        self.CdCF_Charges = SchemaCdCF(self, mtgComplet.CdCF, app)
-        self.CdCF_Cout    = ZoneCdCFCout(self, mtgComplet.CdCF, app)
-        self.CdCF_Etancheite    = ZoneCdCFEtancheite(self, mtgComplet.CdCF, app)
+        self.CdCF_Charges = SchemaCdCF(self.nb, mtgComplet.CdCF, app)
+        self.CdCF_Cout    = ZoneCdCFCout(self.nb, mtgComplet.CdCF, app)
+        self.CdCF_Etancheite    = ZoneCdCFEtancheite(self.nb, mtgComplet.CdCF, app)
         
 #        self.ovr = wx.html.HtmlWindow(panel, -1, size=(400, 400))
 
-        self.AddPage(self.CdCF_Charges, u"Efforts sur l'arbre", imageId=0)
-        self.AddPage(self.CdCF_Cout, u"Coût admissible", imageId=1)
-        self.AddPage(self.CdCF_Etancheite, u"Lubrification - Etanchéité", imageId=2)
+        self.nb.AddPage(self.CdCF_Charges, u"Efforts sur l'arbre")#, imageId=0)
+        self.nb.AddPage(self.CdCF_Cout, u"Coût admissible")#, imageId=1)
+        self.nb.AddPage(self.CdCF_Etancheite, u"Lubrification - Etanchéité")#, imageId=2)
         
         # Set up a wx.html.HtmlWindow on the Overview Notebook page
         # we put it in a panel first because there seems to be a
@@ -127,9 +128,13 @@ class nbCdCF(wx.Notebook):
 #            ovr.SetSize(evt.GetSize())
 #        panel.Bind(wx.EVT_SIZE, OnOvrSize)
 #        CdCF_Charges.Bind(wx.EVT_ERASE_BACKGROUND, EmptyHandler)
-        self.SetSelection(0)
+        self.nb.SetSelection(0)
 #        if "gtk2" in wx.PlatformInfo:
 #            self.ovr.SetStandardFonts()
+        sizer = wx.BoxSizer()
+        sizer.Add(self.nb, 1, flag = wx.EXPAND)
+        self.SetSizer(sizer)
+        sizer.Layout()
         self.Layout()
         
     def miseAJourTousCriteres(self):
@@ -139,11 +144,14 @@ class nbCdCF(wx.Notebook):
         
     def GetMaxSize(self):
         w,h = 0,0
-        for p in range(self.GetPageCount()-1):
-            w = max(w,self.GetPage(p).GetSize()[0])
-            h = max(h,self.GetPage(p).GetSize()[1])
+        for p in range(self.nb.GetPageCount()-1):
+            w = max(w,self.nb.GetPage(p).GetSize()[0])
+            h = max(h,self.nb.GetPage(p).GetSize()[1])
         return (w,h)
         
+
+
+
 
 #############################################################################
 #    CdCF    #
@@ -760,8 +768,9 @@ class SchemaCdCF(wx.Panel):
         # Initialisation affichage
         self.afficherTousCriteres()
 
-        border.Add(self.boxSchema, (0,0))
-        border.Add(rsb, (0,1))
+        border.Add(self.boxSchema, (0,0), flag = wx.EXPAND)
+        border.Add(rsb, (0,1), flag = wx.EXPAND)
+        border.AddGrowableCol(1)
         
         self.montrerSliders()
         self.SetSizerAndFit(border)
@@ -1323,7 +1332,8 @@ class ZoneCdCFCout(wx.Panel):
 #        self.sl.SetToolTip(wx.ToolTip(u"Faire glisser pour modifier le coût indicatif maximum"))
 #        self.bsizer.Add(self.sl)
         
-        border.Add(self.controls[70], (0,0))
+        border.Add(self.controls[70], (0,0), flag = wx.EXPAND)
+        border.AddGrowableCol(0)
         self.SetSizerAndFit(border)
         
 #        self.bsizer.FitInside(self)
@@ -1487,9 +1497,11 @@ class ZoneCdCFEtancheite(wx.Panel):
                            10, 1)
         self.controls[61].SetToolTip(u"Réglage de la vitesse de rotation")
         
-        border.Add(self.controls[60], (0,0))
-        border.Add(bsizer, (0,1))
-        border.Add(self.controls[61], (0,2))
+        border.Add(self.controls[60], (0,0), flag = wx.EXPAND)
+        border.Add(bsizer, (0,1), flag = wx.EXPAND)
+        border.Add(self.controls[61], (0,2), flag = wx.EXPAND)
+        border.AddGrowableCol(0)
+        border.AddGrowableCol(2)
         self.SetSizerAndFit(border)
         
 #        self.bsizer.FitInside(self)
