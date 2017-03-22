@@ -2556,7 +2556,7 @@ class A_propos(wx.Dialog):
         #---------
         licence = wx.Panel(nb, -1)
         
-        txt = open("gpl.txt")
+        txt = open("LICENSE.txt")
         lab = wx.TextCtrl(licence, -1, txt.read(), size = (400, -1), 
                           style = wx.TE_READONLY|wx.TE_MULTILINE|wx.BORDER_NONE )
         txt.close()
@@ -2573,7 +2573,7 @@ class A_propos(wx.Dialog):
         nb.AddPage(licence, "Licence")
         
         sizer.Add(hl.HyperLinkCtrl(self, wx.ID_ANY, "Site web de PyVot",
-                                   URL="http://www.pyvot.fr/"),  
+                                   URL="https://github.com/cedrick-f/pyVot"),  
                   flag=wx.ALIGN_RIGHT)
         sizer.Add(nb)
         

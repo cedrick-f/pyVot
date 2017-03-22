@@ -16,9 +16,9 @@ shutil.rmtree("build", ignore_errors=True)
 # Inculsion des fichiers de données
 #################################################################################################
 includefiles = []
-includefiles.extend([('Microsoft.VC90.CRT', "Microsoft.VC90.CRT"),
+includefiles.extend([#('Microsoft.VC90.CRT', "Microsoft.VC90.CRT"),
                      ('Images', "Images"),
-                     'gpl.txt', 'gpl.txt'])
+                     'LICENSE.txt', 'LICENSE.txt'])
 
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {"packages": ["os"], 

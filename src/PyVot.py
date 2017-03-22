@@ -140,28 +140,28 @@ def main():
     app.MainLoop()
 
 
-def PyVotRunning():
-    #
-    # Cette fonction teste si PyVot.exe est déjà lancé, auquel cas on arrete tout.
-    #
-    if not HAVE_WMI:
-        return False
-    else:
-        nb_instances=0
-        try:
-            controler=wmi.WMI()
-            for elem in controler.Win32_Process():
-                if "PyVot.exe"==elem.Caption:
-                    nb_instances=nb_instances+1
-            if nb_instances>=2:
-                sys.exit(0)
-        except:
-            pass
+# def PyVotRunning():
+#     #
+#     # Cette fonction teste si PyVot.exe est déjà lancé, auquel cas on arrete tout.
+#     #
+#     if not HAVE_WMI:
+#         return False
+#     else:
+#         nb_instances=0
+#         try:
+#             controler=wmi.WMI()
+#             for elem in controler.Win32_Process():
+#                 if "PyVot.exe"==elem.Caption:
+#                     nb_instances=nb_instances+1
+#             if nb_instances>=2:
+#                 sys.exit(0)
+#         except:
+#             pass
 #----------------------------------------------------------------------------
 #----------------------------------------------------------------------------
 # from customLogTarget import *
 if __name__ == '__main__':
-    __name__ = 'Main'
+#     __name__ = 'Main'
     #
     # On teste si PyVot est déjà lancé
     #
