@@ -39,8 +39,8 @@ os.chdir(PATH)
 sys.path.append(PATH)
 print "Chemin de l'application :",PATH
 
-SAMPLEPATH = os.path.join(PATH,"Exemples")
-HELPPATH = os.path.join(PATH,"Aide")
+SAMPLEPATH = os.path.join(PATH,"../Exemples")
+HELPPATH = os.path.join(PATH,"../Aide")
 
 #
 # Définition du numéro de version
