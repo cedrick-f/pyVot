@@ -295,7 +295,7 @@ class wxPyVot(wx.Frame):
         
         self.version = globdef.VERSION
         
-        self.SetMinSize((1024,738)) # Taille mini d'écran : 1024x768
+        self.SetMinSize((1024,850)) # Taille mini d'écran : 1024x768
 
         # Use a panel under the AUI panes in order to work around a
         # bug on PPC Macs

@@ -161,7 +161,9 @@ class ZoneImmobAx(ZoneResultats):
 #            if True:#parent.master.options.proposerAnimArret.get() == 1 \
             if analyse.resultatImmobilisation[s][0].clef == 'ArretArbreSens':
                 tag = "Arret"+ str(s)
-                self.boutons[tag] = buttons.ThemedGenBitmapButton(self, 10+s , Images.Img_BoutonMont(tag), style = wx.BORDER_NONE)
+                self.boutons[tag] = buttons.ThemedGenBitmapButton(self, 10+s , 
+                                                                  Images.Img_BoutonMont(tag), 
+                                                                  style = wx.BORDER_NONE)
                 self.boutons[tag].SetToolTipString(Const.bulles['AnalyAnim'])
 
             # Bouton "Chaine"
@@ -169,8 +171,12 @@ class ZoneImmobAx(ZoneResultats):
 #            elif True:#parent.master.options.proposerChaines.get() == 1 \
             elif analyse.resultatImmobilisation[s][0].clef == 'ImmobCorrect':
                 tag = "Chaine"+ str(s)
-                self.boutons[tag] = buttons.ThemedGenBitmapToggleButton(self, 20+s, None, style = wx.BORDER_NONE)
+                self.boutons[tag] = buttons.ThemedGenBitmapToggleButton(self, 20+s, 
+                                                                        None, 
+                                                                        style = wx.BORDER_NONE)
+                
                 self.boutons[tag].SetBitmapLabel(Images.Img_BoutonMont(tag))
+                self.boutons[tag].SetInitialSize()
                 self.boutons[tag].SetToolTipString(Const.bulles['AnalyChai'])
 
 
@@ -273,7 +279,10 @@ class ZoneResistance(ZoneResultats):
             if analyse.resultatEffortAxialMtg[s][0].clef == 'ElemResistPas':
                 tag = "_Chaine"+ str(s)
                 if True:#master.master.options.proposerChaines.get() <> 0 :
-                    self.boutons["_"+tag] = buttons.ThemedGenBitmapToggleButton(self, 30+s, Images.Img_BoutonMont(tag), style = wx.BORDER_NONE)
+                    self.boutons["_"+tag] = buttons.ThemedGenBitmapToggleButton(self, 30+s, 
+                                                                                Images.Img_BoutonMont(tag), 
+                                                                                style = wx.BORDER_NONE)
+                    self.boutons["_"+tag].SetInitialSize()
                     self.boutons["_"+tag].SetToolTipString(Const.bulles['AnalyChai'])
 #                    self.listeActive[s] = ListeActive(self, self.lstNom(s), self.boutons["_"+tag])
 #                    self.listeActive[s].SetToolTipString(Const.bulles['SelectRoul'])
@@ -290,8 +299,11 @@ class ZoneResistance(ZoneResultats):
             elif analyse.resultatEffortAxialMtg[s][0].clef in ['ChargeAxOk']:
                 tag = "Chaine"+ str(s)
                 if True:#parent.master.options.proposerChaines.get() <> 0 :
-                    self.boutons["_"+tag] = buttons.ThemedGenBitmapToggleButton(self, 20+s, None, style = wx.BORDER_NONE)
+                    self.boutons["_"+tag] = buttons.ThemedGenBitmapToggleButton(self, 20+s, 
+                                                                                None, 
+                                                                                style = wx.BORDER_NONE)
                     self.boutons["_"+tag].SetBitmapLabel(Images.Img_BoutonMont(tag))
+                    self.boutons["_"+tag].SetInitialSize()
                     self.boutons["_"+tag].SetToolTipString(Const.bulles['AnalyChai'])
 
 
@@ -300,7 +312,10 @@ class ZoneResistance(ZoneResultats):
 #            elif parent.master.options.proposerAnimArret.get() == 1 \
             elif analyse.resultatEffortAxialMtg[s][0].clef == 'ArretArbreSens':
                 tag = "Arret"+ str(s)
-                self.boutons["_"+tag] = buttons.ThemedGenBitmapButton(self, 10+s, Images.Img_BoutonMont(tag), style = wx.BORDER_NONE)
+                self.boutons["_"+tag] = buttons.ThemedGenBitmapButton(self, 10+s, 
+                                                                      Images.Img_BoutonMont(tag), 
+                                                                      style = wx.BORDER_NONE)
+                self.boutons["_"+tag].SetInitialSize()
                 self.boutons["_"+tag].SetToolTipString(Const.bulles['AnalyAnim'])
 
             # On place les widgets ...
@@ -567,6 +582,7 @@ class ZoneMontabilite(ZoneResultats):
                 self.boutons[tag] = buttons.ThemedGenBitmapToggleButton(self, 100+c,
                                                                         Images.Img_BoutonMont('BagueIsolee'),
                                                                         style = wx.BORDER_NONE)
+                self.boutons[tag].SetInitialSize()
     #                self.SetBitmapLabel(Images.Img_BoutonMont(tag+self.rad))
                 self.AddBouton("2", self.boutons[tag], (2,c), (1,2), flag = wx.ALIGN_CENTRE)
                 self.boutons[tag].SetToolTipString(u"Cliquer pour visualiser la bague de roulement qui ne peut pas être démontée.")
@@ -1247,9 +1263,9 @@ class TBAnalyse(wx.Treebook):
     def OnPageChanged(self, event = None):
 #        print "Page changed"
         if self.GetSelection() == 3:
-            self.nbCdCF.ChangeSelection(2)
+            self.nbCdCF.nb.ChangeSelection(2)
         elif self.GetSelection() == 1:
-            self.nbCdCF.ChangeSelection(0)
+            self.nbCdCF.nb.ChangeSelection(0)
         
         
 #        for p in self.GetAllPages():
@@ -1467,7 +1483,8 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
             buttons.ThemedGenBitmapToggleButton.__init__(self, parent, -1,None, style = wx.BORDER_NONE)
             self.SetBitmapLabel(Images.Img_BoutonMont(tag+self.rad))
             self.SetBitmapSelected(Images.Img_BoutonMont(tag+self.rad+"R"))
-            self.SetSize(self.GetBestSize())
+            self.SetInitialSize()
+#             self.SetSize(self.GetBestSize())
         else:
             buttons.ThemedGenBitmapToggleButton.__init__(self, parent, -1, 
                                                    Images.Img_BoutonMont(tag+self.rad, True),
